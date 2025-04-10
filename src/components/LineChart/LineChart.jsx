@@ -17,14 +17,7 @@ const LineChart = ({ historicalData }) => {
     }
   }, [historicalData]);
 
-  return (
-    <Chart 
-     chartType="LineChart"
-     data={data}
-     height='100%'
-     legendToggle
-    />
-  );
+  return <Chart chartType="LineChart" data={data} height="100%" legendToggle />;
 };
 
 export default LineChart;
