@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import "./Navbar.css";
 import logo from "../../assets/logo.png";
 import { CoinContext } from "../../context/CoinContext";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const { setCurrency } = useContext(CoinContext);
@@ -25,7 +26,9 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
-      <img src={logo} alt="logo" className="logo" />
+      <Link to="/">
+        <img src={logo} alt="logo" className="logo" />
+      </Link>
       <select onChange={handleCurrencyChange}>
         <option value="usd">USD</option>
         <option value="euro">EUR</option>
