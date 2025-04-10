@@ -9,14 +9,7 @@
 .navbar .logo{
     width: max(12vw,120px);
 }
-.navbar ul{
-    display: flex;
-    gap: 40px;
-    list-style: none;
-}
-.navbar ul li{
-    cursor: pointer;;
-}
+
 .navbar select{
     padding: 5px 8px;
     border-radius: 6px;
@@ -28,33 +21,8 @@
     background: #09005c;
     color: white;
 }
-.search-form{
-    padding: 8px;
-    width: 40%;
-    background-color: white;
-    border-radius: 5px;
-    font-size: 20px;
-    display: flex;
-    gap: 10px;
-    justify-content: space-between;
-    align-items: center;
-}
-.search-form input{
-    flex: 1;
-    font-size: 16px;
-    outline: none;
-    border: none;
-    padding-left: 10px;
-}
-.search-form button{
-    border: none;
-    background-color: #7929ff;
-    padding: 10px 30px;
-    color: white;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-.search-form button:hover{
-    background-color: #5b1fbb;
+@media (max-width: 900px) {
+    .navbar{
+        padding: 20px 8%;
+    }
 }
