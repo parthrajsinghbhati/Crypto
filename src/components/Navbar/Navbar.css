@@ -21,6 +21,36 @@
   background: #09005c;
   color: white;
 }
+.nav-links {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+.nav-links a {
+  padding: 5px 10px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+.nav-links a:hover {
+  background: #3203a09c;
+}
+.nav-actions{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.nav-actions button {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid white;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.nav-actions button:hover {
+  background: #3203a0;
+}
 @media (max-width: 900px) {
   .navbar {
     padding: 20px 8%;

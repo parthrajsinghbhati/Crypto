@@ -29,11 +29,30 @@ const Navbar = () => {
       <Link to="/">
         <img src={logo} alt="logo" className="logo" />
       </Link>
-      <select onChange={handleCurrencyChange}>
-        <option value="usd">USD</option>
-        <option value="euro">EUR</option>
-        <option value="inr">INR</option>
-      </select>
+      <ul className="nav-links">
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/about">About</Link>
+        </li>
+        <li>
+          <Link to="/portfolio">Portfolio</Link>
+        </li>
+        <li>
+          <Link to="/blog">Blog</Link>
+        </li>
+      </ul>
+      <div className="nav-actions">
+        <select onChange={handleCurrencyChange}>
+          <option value="usd">USD</option>
+          <option value="euro">EUR</option>
+          <option value="inr">INR</option>
+        </select>
+        <Link to="/login">
+          <button className="login-btn">Login</button>
+        </Link>
+      </div>
     </div>
   );
 };
