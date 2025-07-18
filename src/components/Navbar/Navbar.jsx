@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import "./Navbar.css";
 import logo from "../../assets/logo.png";
 import { CoinContext } from "../../context/CoinContext";
@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const { setCurrency } = useContext(CoinContext);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef();
+  const buttonRef = useRef();
 
   const handleCurrencyChange = (e) => {
     switch (e.target.value) {
@@ -24,25 +27,50 @@ const Navbar = () => {
     }
   };
 
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (
+        menuOpen &&
+        menuRef.current &&
+        !menuRef.current.contains(e.target) &&
+        !buttonRef.current.contains(e.target)
+      ) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [menuOpen]);
+
   return (
     <div className="navbar">
       <Link to="/">
         <img src={logo} alt="logo" className="logo" />
       </Link>
-      <ul className="nav-links">
+
+      <ul className={`nav-links ${menuOpen ? "open" : ""}`} ref={menuRef}>
         <li>
-          <Link to="/">Home</Link>
+          <Link to="/" onClick={() => setMenuOpen(false)}>
+            Home
+          </Link>
         </li>
         <li>
-          <Link to="/about">About</Link>
+          <Link to="/compare" onClick={() => setMenuOpen(false)}>
+            Compare
+          </Link>
         </li>
         <li>
-          <Link to="/portfolio">Portfolio</Link>
+          <Link to="/portfolio" onClick={() => setMenuOpen(false)}>
+            Portfolio
+          </Link>
         </li>
         <li>
-          <Link to="/blog">Blog</Link>
+          <Link to="/blog" onClick={() => setMenuOpen(false)}>
+            Blog
+          </Link>
         </li>
       </ul>
+
       <div className="nav-actions">
         <select onChange={handleCurrencyChange}>
           <option value="usd">USD</option>
@@ -52,6 +80,14 @@ const Navbar = () => {
         <Link to="/login">
           <button className="login-btn">Login</button>
         </Link>
+      </div>
+
+      <div
+        className="hamburger"
+        ref={buttonRef}
+        onClick={() => setMenuOpen(!menuOpen)}
+      >
+        ☰
       </div>
     </div>
   );
