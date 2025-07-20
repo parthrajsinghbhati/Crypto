@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   const { setCurrency } = useContext(CoinContext);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const menuRef = useRef();
   const buttonRef = useRef();
 
@@ -28,6 +29,9 @@ const Navbar = () => {
   };
 
   useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
     const handleClickOutside = (e) => {
       if (
         menuOpen &&
@@ -38,8 +42,13 @@ const Navbar = () => {
         setMenuOpen(false);
       }
     };
+
+    window.addEventListener("resize", handleResize);
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, [menuOpen]);
 
   return (
@@ -55,6 +64,11 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
+          <Link to="/about" onClick={() => setMenuOpen(false)}>
+            About
+          </Link>
+        </li>
+        <li>
           <Link to="/compare" onClick={() => setMenuOpen(false)}>
             Compare
           </Link>
@@ -64,11 +78,14 @@ const Navbar = () => {
             Portfolio
           </Link>
         </li>
-        <li>
-          <Link to="/blog" onClick={() => setMenuOpen(false)}>
-            Blog
-          </Link>
-        </li>
+
+        {isMobile && (
+          <li>
+            <Link to="/login" onClick={() => setMenuOpen(false)}>
+              <button className="login-btn">Login</button>
+            </Link>
+          </li>
+        )}
       </ul>
 
       <div className="nav-actions">
@@ -77,9 +94,12 @@ const Navbar = () => {
           <option value="euro">EUR</option>
           <option value="inr">INR</option>
         </select>
+
+        {!isMobile && (
         <Link to="/login">
           <button className="login-btn">Login</button>
         </Link>
+      )}
       </div>
 
       <div
