@@ -25,7 +25,6 @@ const Chatbot = () => {
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
-  // Auto-scroll to bottom when new messages arrive
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -34,7 +33,6 @@ const Chatbot = () => {
     scrollToBottom();
   }, [messages]);
 
-  // Focus input when chatbot opens
   useEffect(() => {
     if (isOpen && inputRef.current) {
       setTimeout(() => {
@@ -43,7 +41,6 @@ const Chatbot = () => {
     }
   }, [isOpen]);
 
-  // Simulate bot response
   const getBotResponse = (userMessage) => {
     const responses = [
       "I can help you with cryptocurrency information and market data!",
@@ -54,7 +51,6 @@ const Chatbot = () => {
       "You can ask me about coin prices, market trends, or trading strategies.",
     ];
     
-    // Simple keyword-based responses
     const lowerMessage = userMessage.toLowerCase();
     if (lowerMessage.includes('price') || lowerMessage.includes('cost')) {
       return "You can check real-time prices on our main dashboard. Which cryptocurrency are you interested in?";
@@ -87,7 +83,6 @@ const Chatbot = () => {
     setInputValue('');
     setIsTyping(true);
 
-    // Simulate bot thinking time
     setTimeout(() => {
       const botResponse = {
         id: Date.now() + 1,
@@ -110,7 +105,6 @@ const Chatbot = () => {
 
   return (
     <div className="chatbot-container">
-      {/* Floating Button */}
       {!isOpen && (
         <button 
           className="chatbot-toggle"
@@ -122,10 +116,8 @@ const Chatbot = () => {
         </button>
       )}
 
-      {/* Chat Window */}
       {isOpen && (
         <div className="chatbot-window">
-          {/* Header */}
           <div className="chatbot-header">
             <div className="chatbot-header-info">
               <div className="chatbot-avatar">
@@ -154,7 +146,6 @@ const Chatbot = () => {
             </div>
           </div>
 
-          {/* Messages Body */}
           <div className="chatbot-messages">
             {messages.map((message, index) => (
               <div 
@@ -184,7 +175,6 @@ const Chatbot = () => {
               </div>
             ))}
             
-            {/* Typing Indicator */}
             {isTyping && (
               <div className="message bot-message">
                 <div className="message-avatar">
@@ -205,7 +195,6 @@ const Chatbot = () => {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input Footer */}
           <form className="chatbot-input" onSubmit={handleSendMessage}>
             <input
               ref={inputRef}
@@ -230,7 +219,6 @@ const Chatbot = () => {
   );
 };
 
-// Typewriter Effect Component
 const TypewriterText = ({ text, speed = 50 }) => {
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
