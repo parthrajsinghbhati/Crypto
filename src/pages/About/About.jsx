@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import "./About.css";
-import FeatureCard from "./FeatureCard";
 import Testimonial from "./Testimonial";
 import hero from "../../assets/hero-img.jpg";
 import { FaClock, FaHeart, FaBalanceScale, FaUserTie, FaEnvelope } from "react-icons/fa";

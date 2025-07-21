@@ -68,7 +68,6 @@ const Navbar = () => {
     };
   }, [menuOpen, dropdownOpen]);
 
-  // Username button for nav and mobile
   const UsernameDropdown = () => (
     <div className="user-dropdown-wrapper" ref={dropdownRef}>
       <button

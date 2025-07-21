@@ -1,0 +1,136 @@
+.compare-page {
+  padding: 2rem 1rem;
+  min-height: 80vh;
+}
+.compare-page h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 600;
+}
+.compare-searches {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+}
+.compare-search-form {
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.compare-search-form input {
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1.5px solid #7929ff;
+  font-size: 1rem;
+  background: #181c2a;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  outline: none;
+  transition: border 0.2s;
+}
+.compare-search-form input:focus {
+  border: 1.5px solid #fff;
+}
+.compare-table-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.compare-table {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  background: rgba(255,255,255,0.04);
+  border-radius: 16px;
+  box-shadow: 0 4px 18px #0002;
+  min-width: 320px;
+  max-width: 800px;
+  width: 100%;
+  overflow-x: auto;
+}
+.compare-table-header {
+  display: contents;
+}
+.compare-table-label {
+  font-weight: 600;
+  color: #bdbdbd;
+  font-size: 1.08rem;
+  padding: 18px 12px 10px 18px;
+  text-align: left;
+  background: none;
+}
+.compare-table-coin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 12px 8px 0 8px;
+  min-height: 80px;
+}
+.compare-table-coin .coin-name {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.compare-table-coin img {
+  max-width: 40px;
+  margin-bottom: 2px;
+}
+.compare-table-coin p b {
+  font-size: 1rem;
+  color: #fff;
+}
+.compare-table-row {
+  display: contents;
+}
+.compare-table-label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #bdbdbd;
+  padding: 10px 12px 10px 18px;
+  border-bottom: 1px solid #23263a;
+  background: none;
+}
+.compare-table-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  padding: 10px 8px;
+  border-bottom: 1px solid #23263a;
+  text-align: right;
+  background: none;
+}
+.compare-table-row:last-child .compare-table-label,
+.compare-table-row:last-child .compare-table-value {
+  border-bottom: none;
+}
+@media (max-width: 900px) {
+  .compare-table {
+    max-width: 99vw;
+    min-width: 0;
+    font-size: 0.97rem;
+  }
+  .compare-table-label, .compare-table-value {
+    font-size: 0.97rem;
+    padding: 8px 4px;
+  }
+}
+@media (max-width: 600px) {
+  .compare-searches {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .compare-table {
+    font-size: 0.95rem;
+    border-radius: 10px;
+  }
+  .compare-table-label, .compare-table-value {
+    font-size: 0.95rem;
+    padding: 7px 2px;
+  }
+}

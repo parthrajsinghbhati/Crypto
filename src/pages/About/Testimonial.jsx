@@ -1,6 +1,6 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./Testimonial.css";
-import { FaStar } from "react-icons/fa";
+import { FaStar, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const testimonials = [
   {
@@ -41,67 +41,52 @@ const testimonials = [
   },
 ];
 
-const Testimonial = ({ modern, infiniteSlider }) => {
-  const [isPaused, setIsPaused] = useState(false);
-  const trackRef = useRef();
-  const cards = [...testimonials, ...testimonials]; // duplicate for seamless loop
+const VISIBLE = 2;
 
-  useEffect(() => {
-    if (!infiniteSlider) return;
-    const track = trackRef.current;
-    if (!track) return;
-    let animationId;
-    let start;
-    let lastTimestamp = 0;
-    let translateX = 0;
-    const speed = 50; // px per second
+const Testimonial = () => {
+  const [start, setStart] = useState(0);
+  const total = testimonials.length;
 
-    function step(timestamp) {
-      if (!start) start = timestamp;
-      const elapsed = timestamp - lastTimestamp;
-      lastTimestamp = timestamp;
-      if (!isPaused) {
-        translateX -= (speed * elapsed) / 1000;
-        // Reset for infinite loop
-        if (Math.abs(translateX) >= track.scrollWidth / 2) {
-          translateX = 0;
-        }
-        track.style.transform = `translateX(${translateX}px)`;
-      }
-      animationId = requestAnimationFrame(step);
+  const prev = () => setStart((prev) => (prev - 1 + total) % total);
+  const next = () => setStart((prev) => (prev + 1) % total);
+
+  // For peek effect, get prev, visible, next
+  const getIndices = () => {
+    const indices = [];
+    indices.push((start - 1 + total) % total); // left peek
+    for (let i = 0; i < VISIBLE; i++) {
+      indices.push((start + i) % total);
     }
-    animationId = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(animationId);
-  }, [isPaused, infiniteSlider]);
+    indices.push((start + VISIBLE) % total); // right peek
+    return indices;
+  };
+  const indices = getIndices();
 
   return (
-    <div
-      className={modern ? "modern-testimonial-list infinite-slider" : "testimonial-slider"}
-      style={{ overflow: "hidden", position: "relative" }}
-    >
-      <div
-        className="testimonial-track-boxed"
-        ref={trackRef}
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-        style={{ display: "flex", width: "max-content" }}
-      >
-        {cards.map((item, index) => (
+    <div className="testimonial-peek-carousel">
+      <button className="testimonial-arrow left" onClick={prev} aria-label="Previous testimonial">
+        <FaChevronLeft />
+      </button>
+      <div className="testimonial-peek-track">
+        {indices.map((idx, i) => (
           <div
-            className="modern-testimonial-card boxed-marquee"
-            key={index}
+            key={idx}
+            className={`testimonial-peek-card${i === 1 || i === 2 ? " center" : " peek"}`}
           >
-            <img src={item.image} alt={item.name} className="testimonial-avatar" />
+            <img src={testimonials[idx].image} alt={testimonials[idx].name} className="testimonial-avatar" />
             <div className="testimonial-stars">
-              {[...Array(item.rating)].map((_, i) => (
-                <FaStar key={i} color="#ffd700" size={16} />
+              {[...Array(testimonials[idx].rating)].map((_, j) => (
+                <FaStar key={j} color="#ffd700" size={16} />
               ))}
             </div>
-            <p className="testimonial-feedback">"{item.feedback}"</p>
-            <h4 className="testimonial-name">- {item.name}</h4>
+            <p className="testimonial-feedback">"{testimonials[idx].feedback}"</p>
+            <h4 className="testimonial-name">- {testimonials[idx].name}</h4>
           </div>
         ))}
       </div>
+      <button className="testimonial-arrow right" onClick={next} aria-label="Next testimonial">
+        <FaChevronRight />
+      </button>
     </div>
   );
 };
