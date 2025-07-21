@@ -8,6 +8,26 @@ const CoinContextProvider = (props) => {
     name: "usd",
     symbol: "$",
   });
+  const [user, setUser] = useState(null);
+
+  const signup = (email, password, name) => {
+    const newUser = { email, password, name };
+    localStorage.setItem('cryptoUser', JSON.stringify(newUser));
+    setUser(newUser);
+  };
+
+  const login = (email, password) => {
+    const storedUser = JSON.parse(localStorage.getItem('cryptoUser'));
+    if (storedUser && storedUser.email === email && storedUser.password === password) {
+      setUser(storedUser);
+      return true;
+    }
+    return false;
+  };
+
+  const logout = () => {
+    setUser(null);
+  };
 
   const fetchAllCoin = async () => {
     const options = {
@@ -35,6 +55,11 @@ const CoinContextProvider = (props) => {
     allCoins,
     currency,
     setCurrency,
+    user,
+    setUser,
+    signup,
+    login,
+    logout,
   };
 
   return (

@@ -2,14 +2,15 @@ import React, { useContext, useState, useEffect, useRef } from "react";
 import "./Navbar.css";
 import logo from "../../assets/logo.png";
 import { CoinContext } from "../../context/CoinContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  const { setCurrency } = useContext(CoinContext);
+  const { setCurrency, user, logout } = useContext(CoinContext);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const menuRef = useRef();
   const buttonRef = useRef();
+  const navigate = useNavigate();
 
   const handleCurrencyChange = (e) => {
     switch (e.target.value) {
@@ -26,6 +27,11 @@ const Navbar = () => {
         setCurrency({ name: "usd", symbol: "$" });
         break;
     }
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
   };
 
   useEffect(() => {
@@ -81,9 +87,16 @@ const Navbar = () => {
 
         {isMobile && (
           <li>
-            <Link to="/login" onClick={() => setMenuOpen(false)}>
-              <button className="login-btn">Login</button>
-            </Link>
+            {user ? (
+              <>
+                <span className="user-name">{user.name}</span>
+                <button className="login-btn" onClick={() => { setMenuOpen(false); handleLogout(); }}>Logout</button>
+              </>
+            ) : (
+              <Link to="/login" onClick={() => setMenuOpen(false)}>
+                <button className="login-btn">Login</button>
+              </Link>
+            )}
           </li>
         )}
       </ul>
@@ -96,10 +109,17 @@ const Navbar = () => {
         </select>
 
         {!isMobile && (
-        <Link to="/login">
-          <button className="login-btn">Login</button>
-        </Link>
-      )}
+          user ? (
+            <>
+              <span className="user-name">{user.name}</span>
+              <button className="login-btn" onClick={handleLogout}>Logout</button>
+            </>
+          ) : (
+            <Link to="/login">
+              <button className="login-btn">Login</button>
+            </Link>
+          )
+        )}
       </div>
 
       <div
