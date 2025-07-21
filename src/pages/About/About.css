@@ -1,7 +1,7 @@
 .about-container {
-  padding: 2.5rem 1rem;
+  padding: 2.5rem 1rem 1.5rem 1rem;
   color: #f0f0f0;
-  min-height: 100vh;
+  min-height: 0;
   font-family: "Outfit", sans-serif;
 }
 
@@ -15,7 +15,7 @@
 }
 
 .hero-section {
-  margin-bottom: 5rem;
+  margin-bottom: 4rem;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -24,60 +24,207 @@
 
 .hero-img {
   width: 80%;
-  max-height: 500px;
+  max-height: 420px;
   object-fit: cover;
   border-radius: 16px;
   margin-bottom: 2rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
 }
 
 .hero-text h1 {
   font-size: 2.8rem;
   margin-bottom: 0.5rem;
-  color: #ffffff;
+  color: #fff;
   text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
 }
 
 .hero-text p {
   font-size: 1.2rem;
   max-width: 650px;
-  margin: 0 auto;
+  margin: 0 auto 1.5rem auto;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-.features-section {
-  margin: 5rem 0;
-  text-align: center;
+.about-cta {
+  display: inline-block;
+  background: #7929ff;
+  color: #fff;
+  padding: 12px 36px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(121,41,255,0.12), 0 0 0 3px #fff6, 0 1px 8px #0008;
+  /* border: 2px solid #fff; */
+  letter-spacing: 0.5px;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+}
+.about-cta:hover {
+  background: #5b1fbb;
+  color: #fff;
+  border: 2px solid #fff;
 }
 
-.features {
+.open-features-list {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
   flex-wrap: wrap;
-  gap: 2rem;
+  justify-content: center;
+  gap: 2.5rem;
   margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.open-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  background: none;
+  border: none;
+  padding: 0.5rem 0.5rem;
+  min-width: 220px;
+  max-width: 350px;
+  transition: background 0.2s;
+}
+.open-feature-icon {
+  font-size: 2.5rem;
+  color: #7929ff;
+  min-width: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s, transform 0.2s;
+}
+.open-feature:hover .open-feature-icon {
+  color: #fff;
+  transform: scale(1.15) rotate(-6deg);
+}
+.open-feature h3 {
+  margin: 0 0 0.2rem 0;
+  font-size: 1.15rem;
+  color: #fff;
+}
+.open-feature p {
+  color: #bdbdbd;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
 }
 
-.testimonial-section {
-  margin: 6rem 0 4rem;
+.open-team-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.open-team-member {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  background: none;
+  border: none;
+  padding: 0.5rem 0.5rem;
+  min-width: 220px;
+  max-width: 350px;
+}
+.open-team-icon {
+  font-size: 2.5rem;
+  color: #7929ff;
+  min-width: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 0 2px #fff) drop-shadow(0 0 6px #0008);
+  transition: color 0.2s, transform 0.2s;
+}
+.open-team-member:hover .open-team-icon {
+  color: #fff;
+  transform: scale(1.15) rotate(-6deg);
+}
+.open-team-member h4 {
+  margin: 0.5rem 0 0.2rem 0;
+  font-size: 1.15rem;
+  color: #fff;
+}
+.open-team-member p {
+  color: #bdbdbd;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+.open-team-email {
+  color: #fff;
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  text-decoration: none;
+  font-size: 0.97rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.2rem;
+  box-shadow: none;
+  transition: color 0.2s;
+}
+.open-team-email:hover {
+  text-decoration: underline;
+  color: #7929ff;
+  background: none;
+}
+
+.modern-testimonials {
+  border-radius: 18px;
+  padding: 2.5rem 1rem;
+  margin: 3rem 0 2rem 0;
+
+}
+
+.about-contact {
+  margin: 3rem 0 1rem 0;
   text-align: center;
+  font-size: 1.08rem;
+}
+.about-contact a {
+  color: #fff;
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  text-decoration: none;
+  box-shadow: none;
+  transition: color 0.2s;
+}
+.about-contact a:hover {
+  text-decoration: underline;
+  color: #7929ff;
+  background: none;
 }
 
-.contact-section {
-  background-color: transparent;
-}
-
-@media screen and (max-width: 768px) {
-  .hero-text h1 {
-    font-size: 2rem;
-  }
-
-  .hero-text p {
-    font-size: 1rem;
-  }
-
-  .features {
+@media screen and (max-width: 900px) {
+  .open-features-list, .open-team-list {
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
+  }
+  .hero-img {
+    width: 98%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .hero-text h1 {
+    font-size: 2rem;
+  }
+  .hero-text p {
+    font-size: 1rem;
+  }
+  .about-cta {
+    padding: 10px 18px;
+    font-size: 1rem;
+  }
+  .modern-testimonials {
+    padding: 1.2rem 0.3rem;
   }
 }

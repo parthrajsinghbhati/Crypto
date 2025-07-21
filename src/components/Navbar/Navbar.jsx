@@ -3,13 +3,16 @@ import "./Navbar.css";
 import logo from "../../assets/logo.png";
 import { CoinContext } from "../../context/CoinContext";
 import { Link, useNavigate } from "react-router-dom";
+import { FaUserCircle, FaChevronDown } from "react-icons/fa";
 
 const Navbar = () => {
   const { setCurrency, user, logout } = useContext(CoinContext);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const menuRef = useRef();
   const buttonRef = useRef();
+  const dropdownRef = useRef();
   const navigate = useNavigate();
 
   const handleCurrencyChange = (e) => {
@@ -31,6 +34,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     logout();
+    setDropdownOpen(false);
     navigate("/");
   };
 
@@ -47,6 +51,13 @@ const Navbar = () => {
       ) {
         setMenuOpen(false);
       }
+      if (
+        dropdownOpen &&
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target)
+      ) {
+        setDropdownOpen(false);
+      }
     };
 
     window.addEventListener("resize", handleResize);
@@ -55,7 +66,28 @@ const Navbar = () => {
       window.removeEventListener("resize", handleResize);
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [menuOpen]);
+  }, [menuOpen, dropdownOpen]);
+
+  // Username button for nav and mobile
+  const UsernameDropdown = () => (
+    <div className="user-dropdown-wrapper" ref={dropdownRef}>
+      <button
+        className="user-dropdown-btn"
+        onClick={() => setDropdownOpen((open) => !open)}
+      >
+        <FaUserCircle className="user-dropdown-icon" />
+        <span className="user-dropdown-name">{user.name}</span>
+        <FaChevronDown className={`user-dropdown-chevron${dropdownOpen ? " open" : ""}`} />
+      </button>
+      {dropdownOpen && (
+        <div className="user-dropdown-menu">
+          <button className="user-dropdown-logout" onClick={handleLogout}>
+            Logout
+          </button>
+        </div>
+      )}
+    </div>
+  );
 
   return (
     <div className="navbar">
@@ -84,14 +116,10 @@ const Navbar = () => {
             Portfolio
           </Link>
         </li>
-
         {isMobile && (
           <li>
             {user ? (
-              <>
-                <span className="user-name">{user.name}</span>
-                <button className="login-btn" onClick={() => { setMenuOpen(false); handleLogout(); }}>Logout</button>
-              </>
+              <UsernameDropdown />
             ) : (
               <Link to="/login" onClick={() => setMenuOpen(false)}>
                 <button className="login-btn">Login</button>
@@ -107,13 +135,9 @@ const Navbar = () => {
           <option value="euro">EUR</option>
           <option value="inr">INR</option>
         </select>
-
         {!isMobile && (
           user ? (
-            <>
-              <span className="user-name">{user.name}</span>
-              <button className="login-btn" onClick={handleLogout}>Logout</button>
-            </>
+            <UsernameDropdown />
           ) : (
             <Link to="/login">
               <button className="login-btn">Login</button>
