@@ -2,11 +2,12 @@ import React, { useState, useRef, useEffect } from 'react';
 import './Chatbot.css';
 import { 
   FaRobot, 
-  FaPaperPlane, 
+  FaPaperPlane,
   FaChevronDown, 
   FaChevronUp,
   FaTimes 
 } from 'react-icons/fa';
+import logo from '../../assets/logo.png';
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -220,7 +221,7 @@ const Chatbot = () => {
               disabled={!inputValue.trim()}
               aria-label="Send message"
             >
-              <FaPaperPlane />
+              <img src={logo} alt="Send" className="chatbot-send-logo" />
             </button>
           </form>
         </div>

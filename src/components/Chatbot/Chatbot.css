@@ -383,6 +383,18 @@
   cursor: not-allowed;
 }
 
+.chatbot-send-logo {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  transition: transform 0.2s;
+}
+
+.chatbot-send-btn:hover:not(:disabled) .chatbot-send-logo {
+  transform: scale(1.1);
+}
+
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
   .chatbot-container {
