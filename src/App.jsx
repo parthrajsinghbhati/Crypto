@@ -8,6 +8,7 @@ import { Compare } from "./pages/Compare/Compare";
 import { Portfolio } from "./pages/Portfolio/Portfolio";
 import { About } from "./pages/About/About";
 import { Login } from "./pages/Login/Login";
+import Chatbot from "./components/Chatbot/Chatbot";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/login" element={<div><Login/></div>} />
       </Routes>
       <Footer />
+      <Chatbot />
     </div>
   );
 };
